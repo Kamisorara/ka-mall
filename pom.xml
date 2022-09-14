@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.kamall.mall</groupId>
+    <artifactId>kamall</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>kamall</name>
+    <description>kamall</description>
+    <!--    子模块-->
+    <modules>
+        <module>kamall-common</module>
+        <module>kamall-security</module>
+        <module>kamall-admin</module>
+        <module>kamall-portal</module>
+    </modules>
+    <!--    父工程基于springboot 2.7.3-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.3</version>
+        <relativePath/>
+    </parent>
+    <!--    依赖版本管理-->
+    <properties>
+        <java.version>1.8</java.version>
+        <hutool.version>5.8.6</hutool.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <jjwt.version>0.9.0</jjwt.version>
+        <swagger.version>3.0.0</swagger.version>
+        <mybatis-plus-annotation.version>3.4.3</mybatis-plus-annotation.version>
+        <fastDfsClient.version>1.27.2</fastDfsClient.version>
+        <javaxServlet.version>3.0.1</javaxServlet.version>
+        <kamall-common.version>0.0.1-SNAPSHOT</kamall-common.version>
+        <kamall-admin.version>0.0.1-SNAPSHOT</kamall-admin.version>
+        <kamall-portal.version>0.0.1-SNAPSHOT</kamall-portal.version>
+        <kamall-security.version>0.0.1-SNAPSHOT</kamall-security.version>
+        <mybatis-plus.version>3.4.3</mybatis-plus.version>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Hutool Java工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+    <!--    依赖版本控制-->
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.kamall.mall</groupId>
+                <artifactId>kamall-common</artifactId>
+                <version>${kamall-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.kamall.mall</groupId>
+                <artifactId>kamall-admin</artifactId>
+                <version>${kamall-admin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.kamall.mall</groupId>
+                <artifactId>kamall-portal</artifactId>
+                <version>${kamall-portal.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.kamall.mall</groupId>
+                <artifactId>kamall-security</artifactId>
+                <version>${kamall-security.version}</version>
+            </dependency>
+            <!--Hutool Java工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!--fastjson依赖-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!--jwt依赖-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- servlet相关 -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javaxServlet.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--        swagger相关依赖-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+
+            <!--        mybatis-plus注解依赖-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus-annotation.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <!--        mybatis-plus依赖-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!--        fastDfs-client依赖-->
+            <dependency>
+                <groupId>com.github.tobato</groupId>
+                <artifactId>fastdfs-client</artifactId>
+                <version>${fastDfsClient.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

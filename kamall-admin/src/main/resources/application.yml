@@ -1,0 +1,9 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: admin
+  #swagger 配置
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
