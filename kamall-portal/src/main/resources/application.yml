@@ -36,18 +36,11 @@ mybatis-plus:
 secure:
   ignored:
     urls: #安全路径白名单
-      - /swagger-ui/
-      - /swagger-resources/**
-      - /**/v2/api-docs
-      - /**/*.html
-      - /**/*.js
-      - /**/*.css
-      - /**/*.png
-      - /**/*.map
-      - /favicon.ico
-      - /druid/**
-      - /actuator/**
       - /sso/**
-      - /home/**
-      - /product/**
-      - /brand/**
+      - /swagger-ui.html
+      - /swagger-ui/**
+      - /swagger-resources/**
+      - /v2/api-docs
+      - /v3/api-docs
+      - /webjars/**
+

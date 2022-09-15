@@ -7,7 +7,6 @@ import com.kamall.common.util.RedisCache;
 import com.kamall.portal.dao.UserMapper;
 import com.kamall.portal.service.UserService;
 import com.kamall.portal.service.sys.LoginService;
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,9 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.Map;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -46,13 +42,18 @@ public class LoginServiceImpl implements LoginService {
             }
             //获取获取用户id
             User user = userMapper.getUserByName(userName);
-            String userId = user.getId().toString();
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            //生成jwt
-            token = JwtUtil.createJWT(userId);
-            //把完整的用户信息存入redis
-            redisCache.setCacheObject("login:" + userId, userDetails);
+            //账号是否被暂停使用
+            if (user.getStatus().equals("0")) {
+                String userId = user.getId().toString();
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                //生成jwt
+                token = JwtUtil.createJWT(userId);
+                //把完整的用户信息存入redis
+                redisCache.setCacheObject("login:" + userId, userDetails);
+            } else {
+                throw new BadCredentialsException("账号已被暂停使用，禁止登陆");
+            }
         } catch (AuthenticationException e) {
             //登录失败 记入日志中 （还未配置日志信息）
             System.out.println("{登录异常}" + e.getMessage());

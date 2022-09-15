@@ -6,7 +6,7 @@ import com.kamall.common.entity.User;
 import java.util.Map;
 
 /**
- * 用户登录Service
+ * 用户登录注册Service
  */
 public interface LoginService {
 

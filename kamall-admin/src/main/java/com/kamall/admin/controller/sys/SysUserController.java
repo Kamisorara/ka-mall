@@ -2,10 +2,8 @@ package com.kamall.admin.controller.sys;
 
 import com.kamall.admin.service.sys.LoginService;
 import com.kamall.common.api.CommonResult;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +19,7 @@ public class SysUserController {
     private LoginService loginService;
 
     @ApiOperation("用户登录")
-    @PostMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult login(@RequestParam String userName,
                               @RequestParam String password) {

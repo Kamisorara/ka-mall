@@ -13,14 +13,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/sso")
-@Api(tags = "SysUserController")
+@Api(tags = "SysUserController用户接口", description = "用户登录注册相关接口，匿名访问")
 public class SysUserController {
 
     @Autowired
     private LoginService loginService;
 
     @ApiOperation("用户登录")
-    @PostMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult login(@RequestParam String userName,
                               @RequestParam String password) {
