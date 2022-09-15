@@ -1,4 +1,4 @@
-package com.kamall.portal.dao;
+package com.kamall.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.kamall.common.entity.User;

@@ -20,7 +20,7 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
 //        ResponseResult result = new ResponseResult(HttpStatus.FORBIDDEN.value(), "权限不足");
-        CommonResult result = CommonResult.validateFailed("权限不足");
+        CommonResult result = CommonResult.validateFailed("权限不足，无法查看当前内容！");
         String json = JSON.toJSONString(result);
         WebUtils.renderString(response, json);
     }

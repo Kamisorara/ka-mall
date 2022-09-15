@@ -1,8 +1,9 @@
-package com.kamall.portal.service.impl;
+package com.kamall.admin.service.impl;
 
+import com.kamall.admin.dao.UserMapper;
+import com.kamall.admin.service.UserService;
 import com.kamall.common.entity.User;
-import com.kamall.portal.dao.UserMapper;
-import com.kamall.portal.service.UserService;
+
 import com.kamall.security.entity.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

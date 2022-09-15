@@ -23,7 +23,7 @@ spring:
   mail:
     host: smtp.163.com
     username: kamisora2020@163.com
-    password:
+    password: VBWQMVCCRAHOFNDE
     port: 465
     default-encoding: utf-8
     properties:
@@ -42,3 +42,25 @@ mybatis-plus:
   #       id生成策略 auto为数据库自增
   #     id-type: auto
   mapper-locations: classpath*:/mapper/**/*.xml
+
+
+#spring Security 允许匿名访问地址
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /hello
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /**/v2/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /druid/**
+      - /actuator/**
+      - /sso/**
+      - /home/**
+      - /product/**
+      - /brand/**
