@@ -1,5 +1,6 @@
 package com.kamall.admin.service.impl;
 
+import com.kamall.admin.dao.MenuMapper;
 import com.kamall.admin.dao.UserMapper;
 import com.kamall.admin.service.UserService;
 import com.kamall.common.entity.User;
@@ -8,8 +9,10 @@ import com.kamall.security.entity.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 用户相关Service
@@ -20,27 +23,23 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private MenuMapper menuMapper;
 
     @Override
     public User getUserByName(String userName) {
-        User user = userMapper.getUserByName(userName);
-        if (user == null) {
-            return user;
-        }
-        //用户权限还未进开发
-        return user;
+        return userMapper.getUserByName(userName);
     }
 
     @Override
     public UserDetails loadUserByUsername(String userName) {
         User user = getUserByName(userName);
-        if (user != null) {
-            return new LoginUser(user, null); //权限还未实现添加
+        //如果没有找到该用户就抛出异常
+        if (Objects.isNull(user)) {
+            throw new UsernameNotFoundException("用户名或者密码错误");
         }
-        //否则返回错误
-        throw new UsernameNotFoundException("用户名或密码错误");
+        //用户权限列表
+        List<String> permsList = menuMapper.selectPermsByUserId(user.getId());
+        return new LoginUser(user, permsList);
     }
 }

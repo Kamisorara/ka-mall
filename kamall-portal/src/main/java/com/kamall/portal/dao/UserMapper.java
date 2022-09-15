@@ -13,5 +13,5 @@ public interface UserMapper extends BaseMapper<User> {
     //根据用户名搜索用户id
     User getUserByName(String userName);
 
-    //
+
 }
