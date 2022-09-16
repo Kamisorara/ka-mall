@@ -13,4 +13,6 @@ public interface LoginService {
     //用户登录(返回token)
     String login(String userName, String password);
 
+    //用户注册
+
 }
