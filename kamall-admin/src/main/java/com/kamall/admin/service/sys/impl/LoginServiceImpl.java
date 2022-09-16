@@ -8,6 +8,8 @@ import com.kamall.common.entity.User;
 import com.kamall.common.util.JwtUtil;
 import com.kamall.common.util.RedisCache;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-
+    private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
     @Autowired
     private UserMapper userMapper;
 
@@ -38,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
         String token = null;
         try {
             UserDetails userDetails = userService.loadUserByUsername(userName);
-            if (passwordEncoder.matches(password, userDetails.getPassword())) {
+            if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("密码不正确");
             }
             //获取获取用户id
@@ -56,8 +58,7 @@ public class LoginServiceImpl implements LoginService {
                 throw new BadCredentialsException("此账户非管理员类型");
             }
         } catch (AuthenticationException e) {
-            //登录失败 记入日志中 （还未配置日志信息）
-            System.out.println("{登录异常}" + e.getMessage());
+            logger.error("{登录异常}" + e.getMessage());
         }
         return token;
     }
