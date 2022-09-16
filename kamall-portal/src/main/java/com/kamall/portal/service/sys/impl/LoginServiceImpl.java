@@ -2,8 +2,11 @@ package com.kamall.portal.service.sys.impl;
 
 
 import com.kamall.common.entity.User;
+import com.kamall.common.entity.UserLoginLog;
 import com.kamall.common.util.JwtUtil;
 import com.kamall.common.util.RedisCache;
+import com.kamall.common.util.RequestUtil;
+import com.kamall.portal.dao.UserLoginLogMapper;
 import com.kamall.portal.dao.UserMapper;
 import com.kamall.portal.service.UserService;
 import com.kamall.portal.service.sys.LoginService;
@@ -17,6 +20,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -29,6 +36,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserLoginLogMapper userLoginLogMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -52,6 +62,7 @@ public class LoginServiceImpl implements LoginService {
                 //生成jwt
                 token = JwtUtil.createJWT(userId);
                 //把完整的用户信息存入redis
+                insertLoginLog(Long.parseLong(userId));
                 redisCache.setCacheObject("login:" + userId, userDetails);
             } else {
                 throw new BadCredentialsException("账号已被暂停使用，禁止登陆");
@@ -61,5 +72,16 @@ public class LoginServiceImpl implements LoginService {
             logger.error("{登录异常}" + e.getMessage());
         }
         return token;
+    }
+
+    @Override
+    public void insertLoginLog(Long userId) {
+        UserLoginLog userLoginLog = new UserLoginLog();
+        userLoginLog.setUserId(userId);
+        //查询ip地址
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        userLoginLog.setIp(RequestUtil.getRequestIp(request));
+        userLoginLogMapper.insert(userLoginLog);
     }
 }
