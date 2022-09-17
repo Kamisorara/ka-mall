@@ -14,6 +14,13 @@ import org.springframework.context.annotation.ComponentScan;
 public class PortalApplication {
     public static void main(String[] args) {
         SpringApplication.run(PortalApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  ka-mall前台系统启动成功   ლ(´ڡ`ლ)ﾞ  \n"
+                + ".-.                                .-.  .-.  \n" +
+                ": :.-.                             : :  : :  \n" +
+                ": `'.' .--.  _____ ,-.,-.,-. .--.  : :  : :  \n" +
+                ": . `.' .; ;:_____:: ,. ,. :' .; ; : :_ : :_ \n" +
+                ":_;:_;`.__,_;      :_;:_;:_;`.__,_;`.__;`.__;\n" +
+                "                                             ");
     }
 
 }
