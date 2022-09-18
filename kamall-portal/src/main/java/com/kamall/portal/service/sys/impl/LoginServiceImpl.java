@@ -3,6 +3,7 @@ package com.kamall.portal.service.sys.impl;
 
 import com.kamall.common.entity.User;
 import com.kamall.common.entity.UserLoginLog;
+import com.kamall.common.exception.Asserts;
 import com.kamall.common.util.JwtUtil;
 import com.kamall.common.util.RedisCache;
 import com.kamall.common.util.RequestUtil;
@@ -65,7 +66,7 @@ public class LoginServiceImpl implements LoginService {
                 insertLoginLog(Long.parseLong(userId));
                 redisCache.setCacheObject("login:" + userId, userDetails);
             } else {
-                throw new BadCredentialsException("账号已被暂停使用，禁止登陆");
+                Asserts.fail("该账号已被停用");
             }
 
         } catch (AuthenticationException e) {
