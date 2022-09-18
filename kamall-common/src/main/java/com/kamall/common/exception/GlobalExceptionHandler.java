@@ -16,6 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    //全局异常处理
+    @ResponseBody
+    @ExceptionHandler(value = RuntimeException.class)
+    public CommonResult globalHandler(RuntimeException exception) {
+        return CommonResult.failed("程序发生未知错误，请重试");
+    }
+
+
     @ResponseBody
     @ExceptionHandler(value = ApiException.class)
     public CommonResult handle(ApiException exception) {
@@ -24,6 +32,7 @@ public class GlobalExceptionHandler {
         }
         return CommonResult.failed(exception.getMessage());
     }
+
 
     @ResponseBody
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
