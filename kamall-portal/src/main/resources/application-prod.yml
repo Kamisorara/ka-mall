@@ -10,6 +10,13 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  #rabbitMQ
+  rabbitmq:
+    host: 192.168.31.250
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /ka-mall
   #配置redis
   redis:
     host: 192.168.31.250
@@ -17,7 +24,7 @@ spring:
   mail:
     host: smtp.163.com
     username: kamisora2020@163.com
-    password: VBWQMVCCRAHOFNDE
+    password:
     port: 465
     default-encoding: utf-8
     properties:

@@ -11,7 +11,7 @@ spring:
   mail:
     host: smtp.163.com
     username: kamisora2020@163.com
-    password:
+    password: VBWQMVCCRAHOFNDE
     port: 465
     default-encoding: utf-8
     properties:
