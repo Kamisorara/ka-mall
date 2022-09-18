@@ -24,11 +24,6 @@ public class HelloTestController {
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     @PreAuthorize("@ka.hasAuthority('sys:super:admin')")
     public String hello() {
-        logger.warn("有用户访问了");
-        logger.info("有用户访问了");
-        logger.debug("有用户访问了");
-        logger.error("有用户访问了");
-
         //测试登录获取ip地址
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
