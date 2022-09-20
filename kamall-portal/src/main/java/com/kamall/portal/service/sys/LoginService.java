@@ -17,5 +17,9 @@ public interface LoginService {
     void insertLoginLog(Long userId);
 
     //用户注册
-
+    String register(String userName,
+                    String password,
+                    String passwordRepeat,
+                    String emailAddr,
+                    String emailVerifyCode);
 }

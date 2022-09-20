@@ -20,18 +20,4 @@ spring:
   #配置redis
   redis:
     host: 192.168.31.250
-  #配置java mail
-  mail:
-    host: smtp.163.com
-    username: kamisora2020@163.com
-    password:
-    port: 465
-    default-encoding: utf-8
-    properties:
-      mail:
-        smtp:
-          starttls:
-            enable: true
-            required: true
-          ssl:
-            enable: true
+

@@ -38,7 +38,7 @@ public class RabbitMqConfig {
     @Bean
     public Binding smsBingding() {
         return BindingBuilder.bind((smsQueue())) //绑定队列
-                .to(directExchange()) //到交换机
+                .to(directExchange()) //到绑定交换机
                 .with(RabbitMqConstant.SMS_ROUTING_KEY); //使用自定义的routingKey
     }
 
@@ -46,7 +46,7 @@ public class RabbitMqConfig {
     @Bean
     public Binding emailBingding() {
         return BindingBuilder.bind((emailQueue())) //绑定队列
-                .to(directExchange()) //到交换机
+                .to(directExchange()) //到绑定交换机
                 .with(RabbitMqConstant.EMAIL_ROUTING_KEY); //使用自定义的routingKey
     }
 
