@@ -6,15 +6,15 @@ package com.kamall.common.constant;
 public class RabbitMqConstant {
 
     //交换机名称
-    public static final String EXCHANGE = "direct_order_exchange";
+    public static final String EXCHANGE = "kamall_exchange";
 
     //消息队列（Queue名称）
-    public static final String SMS = "sms.direct.queue";
+    public static final String SMS = "kamall.sms.queue";
 
-    public static final String EMAIL = "email.direct.queue";
+    public static final String EMAIL = "kamall.email.queue";
 
     //routingKey
-    public static final String SMS_ROUTING_KEY = "sns";
+    public static final String SMS_ROUTING_KEY = "sms";
 
     public static final String EMAIL_ROUTING_KEY = "email";
 

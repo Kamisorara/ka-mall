@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * rabbitMQ配置类
  */
-@Configuration
+
 public class RabbitMqConfig {
 
     //1.申明注册交换机

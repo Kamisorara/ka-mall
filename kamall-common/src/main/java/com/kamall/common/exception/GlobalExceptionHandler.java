@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = RuntimeException.class)
     public CommonResult globalHandler(RuntimeException exception) {
-        return CommonResult.failed("程序发生未知错误，请重试");
+        return CommonResult.failed("{ 全局程序异常 }" + exception.getMessage());
     }
 
 
